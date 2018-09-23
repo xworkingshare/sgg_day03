@@ -45,7 +45,7 @@ public class ManageServiceImpl implements ManageService {
     public List<BaseCatalog3> getCatalog3(String catalog2Id) {
         BaseCatalog3 baseCatalog3 = new BaseCatalog3();
         baseCatalog3.setCatalog2Id(catalog2Id);
-        return  baseCatalog3Mapper.select(baseCatalog3);
+        return baseCatalog3Mapper.select(baseCatalog3);
     }
 
     @Override
@@ -58,11 +58,11 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public void saveAttrInfo(BaseAttrInfo baseAttrInfo) {
         //  判断当前id 是否存在
-        if (baseAttrInfo.getId()!=null && baseAttrInfo.getId().length()>0){
+        if (baseAttrInfo.getId() != null && baseAttrInfo.getId().length() > 0) {
             baseAttrInfoMapper.updateByPrimaryKey(baseAttrInfo);
-        }else {
+        } else {
             // 防止baseAttrInfo.getId()="";
-            if (baseAttrInfo.getId().length()==0){
+            if (baseAttrInfo.getId().length() == 0) {
                 baseAttrInfo.setId(null);
             }
             baseAttrInfoMapper.insertSelective(baseAttrInfo);
@@ -75,13 +75,13 @@ public class ManageServiceImpl implements ManageService {
 
         List<BaseAttrValue> attrValueList = baseAttrInfo.getAttrValueList();
         for (BaseAttrValue attrValue : attrValueList) {
-                if (attrValue.getId().length()==0){
-                    attrValue.setId(null);
-                }
-                // 要取得BaseAttrInfo的id 实际上是取得数据库中自动增长的Id
-                attrValue.setAttrId(baseAttrInfo.getId());
-                baseAttrValueMapper.insertSelective(attrValue);
+            if (attrValue.getId().length() == 0) {
+                attrValue.setId(null);
             }
+            // 要取得BaseAttrInfo的id 实际上是取得数据库中自动增长的Id
+            attrValue.setAttrId(baseAttrInfo.getId());
+            baseAttrValueMapper.insertSelective(attrValue);
+        }
     }
 
     @Override
@@ -98,6 +98,6 @@ public class ManageServiceImpl implements ManageService {
 
     @Override
     public List<SpuInfo> getSpuInfoList(SpuInfo spuInfo) {
-       return spuInfoMapper.select(spuInfo);
+        return spuInfoMapper.select(spuInfo);
     }
 }

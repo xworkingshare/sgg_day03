@@ -9,6 +9,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * @ClassName: SpuManageController
+ * @Description:
+ * @Author: 谢万清
+ * @CreateTime: 2018/9/22  23:58
+ * @Version: 1.0
+ **/
+
+
 @Controller
 public class SpuManageController {
 
@@ -16,17 +25,17 @@ public class SpuManageController {
     private ManageService manageService;
 
     @RequestMapping("spuListPage")
-    public String spuListPage(){
+    public String spuListPage() {
         return "spuListPage";
     }
 
-    // select * from spuInfo where catalog3Id = ?
     @RequestMapping("spuList")
     @ResponseBody
-    public List<SpuInfo> spuList(String catalog3Id){
+    public List<SpuInfo> spuList(String catalog3Id) {
+        // select * from spuInfo where catalog3Id = ?
         // 调用后台
         SpuInfo spuInfo = new SpuInfo();
         spuInfo.setCatalog3Id(catalog3Id);
-        return  manageService.getSpuInfoList(spuInfo);
+        return manageService.getSpuInfoList(spuInfo);
     }
 }
